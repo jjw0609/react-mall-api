@@ -27,4 +27,24 @@ public class Todo {
     private boolean completed;
 
     private LocalDate dueDate;
+
+    public void changeDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void changeCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public void changeContent(String content) {
+        this.content = content;
+    }
+
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
+    public void changeTno(Long tno) {
+        this.tno = tno;
+    }
 }
