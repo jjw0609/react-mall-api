@@ -2,6 +2,8 @@ package org.jjw.reactmallapi.service;
 
 import jakarta.transaction.Transactional;
 import org.jjw.reactmallapi.domain.Todo;
+import org.jjw.reactmallapi.dto.PageRequestDTO;
+import org.jjw.reactmallapi.dto.PageResponseDTO;
 import org.jjw.reactmallapi.dto.TodoDTO;
 
 @Transactional
@@ -14,6 +16,8 @@ public interface TodoService {
     void modify(TodoDTO dto);
 
     void remove(Long tno);
+
+    PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
 
     default TodoDTO entityToDTO(Todo todo) {
 
