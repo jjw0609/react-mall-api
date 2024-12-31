@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+
 @RestController
 @Log4j2
 @RequiredArgsConstructor
@@ -34,13 +35,30 @@ public class TodoController {
     }
 
     @PostMapping("/")
-    public Map<String, Long> register(@RequestBody TodoDTO dto) {
+    public Map<String, Long> register(@RequestBody TodoDTO todoDTO) {
 
-        log.info("todoDTO : " + dto);
+        log.info("todoDTO : " + todoDTO);
 
-        Long tno = todoService.register(dto);
+        Long tno = todoService.register(todoDTO);
 
         return Map.of("TNO", tno);
     }
 
+    @PutMapping("/{tno}")
+    public Map<String, String> modify(@PathVariable("tno") Long tno, @RequestBody TodoDTO todoDTO) {
+
+        todoDTO.setTno(tno);
+
+        todoService.modify(todoDTO);
+
+        return Map.of("RESULT", "SUCCESS");
+    }
+
+    @DeleteMapping("/{tno}")
+    public Map<String, String> delete(@PathVariable Long tno) {
+
+        todoService.remove(tno);
+
+        return Map.of("RESULT", "SUCCESS");
+    }
 }
