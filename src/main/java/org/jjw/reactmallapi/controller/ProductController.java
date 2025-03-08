@@ -3,7 +3,10 @@ package org.jjw.reactmallapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.jjw.reactmallapi.dto.PageRequestDTO;
+import org.jjw.reactmallapi.dto.PageResponseDTO;
 import org.jjw.reactmallapi.dto.ProductDTO;
+import org.jjw.reactmallapi.service.ProductService;
 import org.jjw.reactmallapi.util.CustomFileUtil;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,8 @@ import java.util.Map;
 @RequestMapping("/api/products")
 public class ProductController {
 
+    private final ProductService productService;
+
     private final CustomFileUtil fileUtil;
 
     @PostMapping("/")
@@ -30,7 +35,7 @@ public class ProductController {
 
         List<String> uploadedFileNames = fileUtil.saveFiles(files);
 
-        productDTO.setUploadedFileNames(uploadedFileNames);
+        productDTO.setUploadFileNames(uploadedFileNames);
 
         log.info(uploadedFileNames);
 
@@ -41,5 +46,11 @@ public class ProductController {
     public ResponseEntity<Resource> viewFileGET(@PathVariable String fileName) {
 
         return fileUtil.getFile(fileName);
+    }
+
+    @GetMapping("/list")
+    public PageResponseDTO<ProductDTO> list(PageRequestDTO pageRequestDTO) {
+
+        return productService.getList(pageRequestDTO);
     }
 }
