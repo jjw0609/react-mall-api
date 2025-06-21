@@ -59,18 +59,19 @@ public class TodoServiceImpl implements TodoService {
     public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
 
         //JPA
-        Page<Todo> result = todoRepository.search1(pageRequestDTO);
-
-        List<TodoDTO> dtoList = result.get().map(todo -> entityToDTO(todo)).collect(Collectors.toList());
-
-        PageResponseDTO<TodoDTO> responseDTO =
-                PageResponseDTO.<TodoDTO>withAll()
-                        .dtoList(dtoList)
-                        .pageRequestDTO(pageRequestDTO)
-                        .totalCount(result.getTotalElements())
-                        .build();
-
-        return responseDTO;
+//        Page<Todo> result = todoRepository.search1(pageRequestDTO);
+//
+//        List<TodoDTO> dtoList = result.get().map(todo -> entityToDTO(todo)).collect(Collectors.toList());
+//
+//        PageResponseDTO<TodoDTO> responseDTO =
+//                PageResponseDTO.<TodoDTO>withAll()
+//                        .dtoList(dtoList)
+//                        .pageRequestDTO(pageRequestDTO)
+//                        .totalCount(result.getTotalElements())
+//                        .build();
+//
+//        return responseDTO;
+        return null;
     }
 
     @Override
